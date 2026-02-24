@@ -1,0 +1,1150 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=headphones" />
+  <title>Biblioteca Digital - IES Parque Aluche</title>
+  <style>
+    :root {
+      --bg: #e8e8e8;
+      --surface: #ffffff;
+      --text: #1f2430;
+      --muted: #646d78;
+      --line: #d7d7d7;
+      --madrid-red: #c40022;
+      --madrid-red-dark: #a3001c;
+      --ies-blue: #2f317e;
+      --ies-orange: #ef7f1a;
+      --shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .material-symbols-rounded {
+      font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .top-strip {
+      background: #efefef;
+      border-bottom: 1px solid #d5d5d5;
+    }
+
+    .top-strip .container {
+      min-height: 98px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .school-brand {
+      display: flex;
+      align-items: center;
+      min-width: 260px;
+    }
+
+    .school-logo {
+      display: block;
+      width: clamp(230px, 28vw, 330px);
+      height: auto;
+    }
+
+    .school-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .portal-title {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      line-height: 0.95;
+      text-align: right;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      color: #1c2230;
+    }
+
+    .portal-title strong {
+      color: #dd3a1f;
+      display: block;
+      font-weight: 800;
+    }
+
+    .lang {
+      width: 100%;
+      text-align: right;
+      font-size: 0.92rem;
+      margin-top: -8px;
+      color: #3d3d3d;
+    }
+
+    .lang a {
+      color: inherit;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+
+    .lang a:first-child {
+      margin-left: 0;
+      font-weight: 700;
+    }
+
+    .menu-strip {
+      background: var(--madrid-red);
+      color: #fff;
+    }
+
+    .menu-strip .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 48px;
+      flex-wrap: wrap;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    nav li {
+      padding: 10px 12px;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    nav li:first-child {
+      background: rgba(0, 0, 0, 0.15);
+      font-weight: 700;
+    }
+
+    .search {
+      width: min(340px, 100%);
+      position: relative;
+      flex: 1 1 240px;
+      margin-left: auto;
+    }
+
+    .search input {
+      width: 100%;
+      height: 36px;
+      border: 0;
+      border-radius: 2px;
+      padding: 8px 38px 8px 10px;
+      font-size: 0.96rem;
+      color: #2e2e2e;
+    }
+
+    .search::after {
+      content: "🔍";
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: #68717d;
+      pointer-events: none;
+    }
+
+    .search-results {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #d6dce3;
+      max-height: 260px;
+      overflow-y: auto;
+      display: none;
+      z-index: 30;
+    }
+
+    .search-results.active {
+      display: block;
+    }
+
+    .search-result-btn {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid #eceff3;
+      text-align: left;
+      background: #fff;
+      color: #232a34;
+      font-weight: 400;
+      padding: 9px 10px;
+      cursor: pointer;
+    }
+
+    .search-result-btn:last-child {
+      border-bottom: 0;
+    }
+
+    .search-result-btn:hover {
+      background: #f4f6f9;
+    }
+
+    .search-result-title {
+      display: block;
+      font-size: 0.9rem;
+      color: #1f2937;
+    }
+
+    .search-result-author {
+      display: block;
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .search-result-empty {
+      padding: 9px 10px;
+      font-size: 0.83rem;
+      color: #6b7280;
+      background: #fff;
+    }
+
+    .breadcrumb {
+      border-bottom: 2px solid #d11e36;
+      padding: 18px 0 12px;
+      color: #5b6470;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .carousel-section {
+      background: #f3f4f6;
+      border-bottom: 1px solid #dfe3e8;
+      padding: 14px 0;
+    }
+
+    .carousel {
+      position: relative;
+      height: clamp(210px, 38vw, 320px);
+      background: #f7f8fa;
+      border: 1px solid #e2e5ea;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      padding: 18px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(10px) scale(0.995);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .carousel-slide img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: min(100%, 500px);
+      max-height: 100%;
+      object-fit: contain;
+      image-rendering: auto;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(20, 24, 31, 0.18);
+      color: #ffffff;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      z-index: 2;
+    }
+
+    .carousel-nav:hover {
+      background: rgba(20, 24, 31, 0.35);
+    }
+
+    .carousel-nav.prev {
+      left: 10px;
+    }
+
+    .carousel-nav.next {
+      right: 10px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+      display: flex;
+      gap: 7px;
+      z-index: 2;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      border-radius: 999px;
+      background: #c4cbd5;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background: #111827;
+      transform: scale(1.1);
+    }
+
+    .carousel-dot:hover {
+      background: #6b7280;
+    }
+
+    main {
+      padding: 0 0 40px;
+    }
+
+    .intro {
+      margin: 0 0 16px;
+      color: #4f5964;
+      font-size: 0.96rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .book {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--madrid-red);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      aspect-ratio: 148 / 210;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      color: #fff;
+    }
+
+    .book::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: var(--cover-image);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .book::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(18, 24, 33, 0.35) 0%, rgba(12, 17, 24, 0.82) 100%);
+    }
+
+    .book:not(.has-cover)::before {
+      background: linear-gradient(145deg, #2f317e 0%, #1f2430 100%);
+    }
+
+    .book:not(.has-cover)::after {
+      background: none;
+    }
+
+    .book h2 {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+      line-height: 1.28;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .book p {
+      margin: 0 0 10px;
+      color: #eef2f7;
+      line-height: 1.4;
+      font-size: 0.9rem;
+      flex: 1;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+    }
+
+    .meta {
+      font-size: 0.82rem;
+      color: #f6f8fb;
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button,
+    .link {
+      border: 1px solid transparent;
+      padding: 7px 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .read-btn {
+      background: var(--madrid-red);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .read-btn:hover {
+      background: var(--madrid-red-dark);
+    }
+
+    .download-link {
+      border-color: rgba(255, 255, 255, 0.55);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(2px);
+    }
+
+    .download-link:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .audio-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(2px);
+    }
+
+    .audio-btn:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .audio-btn.playing {
+      background: var(--ies-orange);
+      border-color: var(--ies-orange);
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      background: #fff;
+      border: 1px dashed #c8cfd8;
+      padding: 24px;
+      color: #5f6977;
+      text-align: center;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 25, 34, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      z-index: 999;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(1020px, 100%);
+      height: min(88vh, 760px);
+      background: #fff;
+      border: 1px solid #d2d2d2;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      background: #f2f2f2;
+      border-bottom: 2px solid var(--madrid-red);
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 0.96rem;
+      color: #243144;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .modal-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .modal iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #f7f7f7;
+    }
+
+    .ghost {
+      background: #fff;
+      border-color: #bcc7d6;
+      color: #2f317e;
+    }
+
+    .ghost:hover {
+      background: #f2f5fb;
+    }
+
+    .close-btn {
+      background: #263344;
+      color: #fff;
+    }
+
+    .close-btn:hover {
+      background: #1b2431;
+    }
+
+    @media (max-width: 860px) {
+      .top-strip .container {
+        min-height: 0;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .portal-title {
+        text-align: left;
+      }
+
+      .lang {
+        margin-top: 0;
+      }
+
+      .menu-strip .container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      nav ul {
+        width: 100%;
+      }
+
+      .search {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      nav li {
+        font-size: 0.9rem;
+        padding: 8px 9px;
+      }
+
+      .modal-content {
+        height: 92vh;
+      }
+
+      .modal-controls {
+        flex-wrap: wrap;
+        justify-content: end;
+      }
+
+      .carousel-nav {
+        width: 29px;
+        height: 29px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-strip">
+      <div class="container">
+        <div class="school-brand" aria-label="IES Parque Aluche">
+          <div class="school-logo" aria-hidden="true">
+            <img src="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMraHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjMtYzAxMSA2Ni4xNDU2NjEsIDIwMTIvMDIvMDYtMTQ6NTY6MjcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjZEODMyRDNCRDgxQTExRUM5RDZBODVGRTNBODlBRUY3IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjZEODMyRDNBRDgxQTExRUM5RDZBODVGRTNBODlBRUY3IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NDc4MEM4MThENkExMTFFQzlENjNFODVCNzQ4NUVCODQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NDc4MEM4MTlENkExMTFFQzlENjNFODVCNzQ4NUVCODQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAAGBAQEBQQGBQUGCQYFBgkLCAYG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" alt="Logotipo IES Parque Aluche">
+          </div>
+        </div>
+        <h1 class="portal-title"><strong id="portalTitleStrong">Biblioteca</strong> <span id="portalTitleRest">del lector</span></h1>
+        <div class="lang"><span id="activeLang">Español</span> <a id="langToggle" href="#">English</a></div>
+      </div>
+    </div>
+
+    <div class="menu-strip">
+      <div class="container">
+        <nav aria-label="Menú principal">
+          <ul>
+            <li>Inicio</li>
+            <li>Consulta</li>
+            <li>Colecciones</li>
+            <li>Hemeroteca</li>
+            <li>Bibliotecas</li>
+            <li>Usuarios</li>
+          </ul>
+        </nav>
+        <label class="search" aria-label="Buscar libros">
+          <input id="searchInput" type="search" placeholder="Buscar por título o autor" autocomplete="off">
+          <div id="searchResults" class="search-results" role="listbox" aria-label="Resultados de búsqueda"></div>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <section class="carousel-section" aria-label="Carrusel de portadas">
+    <div class="container">
+      <div id="bookCarousel" class="carousel">
+        <div id="bookCarouselTrack" class="carousel-track"></div>
+        <button id="carouselPrev" class="carousel-nav prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+        <button id="carouselNext" class="carousel-nav next" type="button" aria-label="Imagen siguiente">&#8250;</button>
+        <div id="carouselDots" class="carousel-dots" aria-label="Selector de portada"></div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <div id="breadcrumb" class="breadcrumb">Está en: Inicio</div>
+      <p id="introText" class="intro">Consulta el catálogo de libros en PDF y ábrelos en una ventana emergente para lectura directa.</p>
+      <section id="bookGrid" class="grid" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <div id="readerModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h2 id="modalTitle" class="modal-title">Lector PDF</h2>
+        <div class="modal-controls">
+          <a id="openNewTab" class="link ghost" href="#" target="_blank" rel="noopener">Abrir en pestaña</a>
+          <button id="closeModal" class="close-btn" type="button">Cerrar</button>
+        </div>
+      </div>
+      <iframe id="pdfFrame" title="Visor de PDF"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const books = [
+      {
+        title: "Junta de Evaluación. La caja de las panderetas.",
+        author: "Camila Rossetti",
+        topic: "Literatura digital",
+        description: "La reforma educativa de las panderetas",
+        file: "libro editado.pdf",
+        audio: "libro editado.mp3",
+        cover: "libro editado.jpg"
+      },
+      {
+        title: "Junta de Evaluación. Secretos",
+        author: "Marcela Pozo",
+        topic: "Literatura digital",
+        description: "Los secretos de la sala de profesores",
+        file: "SECRETOS EN LA SALA DE PROFESORES 4.0.pdf",
+        audio: "SECRETOS EN LA SALA DE PROFESORES 4.0.mp3",
+        cover: "secretos.jpg"
+      },
+      {
+        title: "Junta de Evaluación.",
+        author: "Anne M.",
+        topic: "Literatura digital",
+        description: "El amor de los profesores y las llamas",
+        file: "SECRETOS EN LA SALA DE PROFESORES 4.0.pdf",
+        audio: "SECRETOS EN LA SALA DE PROFESORES 4.0.mp3",
+        cover: "secretos.jpg"
+      },
+      {
+        title: "Junta de Evaluación. Un amor entre fórmulas",
+        author: "Uribe Quintas",
+        topic: "Literatura Digital",
+        description: "Una historia de amor paralela entre la juventud y la madurez",
+        file: "CUENTO ANA.pdf",
+        audio: "CUENTO ANA.mp3",
+        cover: "JUNTA DE EVALUACIÓN A.jpg"
+      },
+       {
+        title: "Junta de Evaluación",
+        author: "Adrián Delmar",
+        topic: "Literatura Digital",
+        description: "Partido de futbol para subir nota",
+        file: "Libro_Oliver.pdf",
+        audio: "Libro_Oliver.mp3",
+        cover: "Portada Libro.jpg"
+      },
+      {
+        title: "La ilusión del control",
+        author: "Elena Rivière",
+        topic: "Fauna",
+        description: "Una aventura ardillística",
+        file: "La ilusión del control.pdf",
+        audio: "L_esquirol_que_fa_sagnar_l_autoritat.mp3",
+        cover: "La ilusión del control (1).jpg"
+      },
+       {
+        title: "Junta de Evaluación",
+        author: "Celeste Virelle",
+        topic: "Literatura Digital",
+        description: "Mafia y amor en el instituto",
+        file: "LIBRO CELESTE ww.pdf",
+        audio: "LIBRO CELESTE ww.mp3",
+        cover: "Junta de evaluación W.jpg"
+      },
+      {
+        title: "Wham",
+        author: "Sancho",
+        topic: "Hackers",
+        description: "Un hackeo a algo, no me acuerdo a qué",
+        file: "JUNTA DE EVALUACION SANCHO.pdf",
+        audio: "JUNTA DE EVALUACION SANCHO.mp3",
+        cover: "JUNTA DE EVALUACION SANCHO.png"
+      },
+    ];
+
+    const grid = document.getElementById("bookGrid");
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+    const activeLang = document.getElementById("activeLang");
+    const langToggle = document.getElementById("langToggle");
+    const breadcrumb = document.getElementById("breadcrumb");
+    const introText = document.getElementById("introText");
+    const portalTitleStrong = document.getElementById("portalTitleStrong");
+    const portalTitleRest = document.getElementById("portalTitleRest");
+    const modal = document.getElementById("readerModal");
+    const pdfFrame = document.getElementById("pdfFrame");
+    const modalTitle = document.getElementById("modalTitle");
+    const closeModalBtn = document.getElementById("closeModal");
+    const openNewTabLink = document.getElementById("openNewTab");
+    const carousel = document.getElementById("bookCarousel");
+    const carouselTrack = document.getElementById("bookCarouselTrack");
+    const carouselDots = document.getElementById("carouselDots");
+    const carouselPrev = document.getElementById("carouselPrev");
+    const carouselNext = document.getElementById("carouselNext");
+    const audioPlayer = new Audio();
+    let activeAudioBtn = null;
+    let carouselIndex = 0;
+    let carouselTimer = null;
+    let carouselSlides = [];
+    const carouselIntervalMs = 4500;
+    let currentLang = "es";
+    const i18n = {
+      es: {
+        activeLang: "Español",
+        toggle: "English",
+        portalStrong: "Biblioteca",
+        portalRest: "del lector",
+        nav: ["Inicio", "Consulta", "Colecciones", "Hemeroteca", "Bibliotecas", "Usuarios"],
+        searchPlaceholder: "Buscar por título o autor",
+        breadcrumb: "Está en: Inicio",
+        intro: "Consulta el catálogo de libros en PDF y ábrelos en una ventana emergente para lectura directa.",
+        modalTitle: "Lector PDF",
+        openTab: "Abrir en pestaña",
+        close: "Cerrar",
+        readNow: "Leer ahora",
+        download: "Descargar",
+        noResults: "No hay resultados para tu búsqueda.",
+        noSearchResults: "Sin resultados por título o autor."
+      },
+      en: {
+        activeLang: "English",
+        toggle: "Español",
+        portalStrong: "Library",
+        portalRest: "for readers",
+        nav: ["Home", "Search", "Collections", "Newspapers", "Libraries", "Users"],
+        searchPlaceholder: "Search by title or author",
+        breadcrumb: "You are here: Home",
+        intro: "Browse the PDF catalog and open books in a pop-up window for direct reading.",
+        modalTitle: "PDF Reader",
+        openTab: "Open in tab",
+        close: "Close",
+        readNow: "Read now",
+        download: "Download",
+        noResults: "No results found for your search.",
+        noSearchResults: "No matches by title or author."
+      }
+    };
+
+    function tr(key) {
+      return i18n[currentLang][key];
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      activeLang.textContent = tr("activeLang");
+      langToggle.textContent = tr("toggle");
+      portalTitleStrong.textContent = tr("portalStrong");
+      portalTitleRest.textContent = tr("portalRest");
+      breadcrumb.textContent = tr("breadcrumb");
+      introText.textContent = tr("intro");
+      searchInput.placeholder = tr("searchPlaceholder");
+      openNewTabLink.textContent = tr("openTab");
+      closeModalBtn.textContent = tr("close");
+      if (!modal.classList.contains("active")) {
+        modalTitle.textContent = tr("modalTitle");
+      }
+
+      const navItems = document.querySelectorAll("nav li");
+      navItems.forEach((item, idx) => {
+        item.textContent = i18n[currentLang].nav[idx] || item.textContent;
+      });
+
+      renderBooks(searchInput.value);
+      renderSearchResults(searchInput.value);
+    }
+
+    function getCarouselBooks() {
+      const uniqueByCover = new Map();
+      books.forEach((book) => {
+        if (typeof book.cover !== "string" || book.cover.trim() === "") return;
+        if (!uniqueByCover.has(book.cover)) uniqueByCover.set(book.cover, book);
+      });
+      return [...uniqueByCover.values()];
+    }
+
+    function updateCarouselUI() {
+      carouselSlides.forEach((slide, idx) => {
+        slide.classList.toggle("active", idx === carouselIndex);
+      });
+
+      const dots = carouselDots.querySelectorAll(".carousel-dot");
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === carouselIndex);
+      });
+    }
+
+    function showCarouselSlide(nextIndex) {
+      if (!carouselSlides.length) return;
+      const total = carouselSlides.length;
+      carouselIndex = (nextIndex + total) % total;
+      updateCarouselUI();
+    }
+
+    function stopCarouselAutoplay() {
+      if (!carouselTimer) return;
+      clearInterval(carouselTimer);
+      carouselTimer = null;
+    }
+
+    function startCarouselAutoplay() {
+      stopCarouselAutoplay();
+      if (carouselSlides.length < 2) return;
+      carouselTimer = setInterval(() => {
+        showCarouselSlide(carouselIndex + 1);
+      }, carouselIntervalMs);
+    }
+
+    function buildCarousel() {
+      const carouselBooks = getCarouselBooks();
+
+      if (!carouselBooks.length) {
+        carousel.style.display = "none";
+        return;
+      }
+
+      carousel.style.display = "";
+      carouselTrack.innerHTML = carouselBooks.map((book, idx) => {
+        const isPriority = idx === 0 ? "eager" : "lazy";
+        const fetchPriority = idx === 0 ? "high" : "low";
+        return `
+          <figure class="carousel-slide${idx === 0 ? " active" : ""}">
+            <img src="${book.cover}" alt="Portada de ${book.title}" loading="${isPriority}" decoding="async" fetchpriority="${fetchPriority}">
+          </figure>
+        `;
+      }).join("");
+
+      carouselDots.innerHTML = carouselBooks.map((book, idx) => {
+        const active = idx === 0 ? " active" : "";
+        return `<button class="carousel-dot${active}" type="button" data-index="${idx}" aria-label="Ir a portada ${idx + 1}: ${book.title}"></button>`;
+      }).join("");
+
+      carouselSlides = [...carouselTrack.querySelectorAll(".carousel-slide")];
+      carouselIndex = 0;
+      updateCarouselUI();
+      startCarouselAutoplay();
+    }
+
+    function stopAudio() {
+      audioPlayer.pause();
+      audioPlayer.currentTime = 0;
+      if (activeAudioBtn) activeAudioBtn.classList.remove("playing");
+      activeAudioBtn = null;
+    }
+
+    async function toggleAudio(button) {
+      const audioFile = button.dataset.audio;
+      if (!audioFile) return;
+
+      const isSameTrack = audioPlayer.src.endsWith(encodeURI(audioFile));
+      const isPlaying = !audioPlayer.paused;
+
+      if (isSameTrack && isPlaying) {
+        stopAudio();
+        return;
+      }
+
+      if (activeAudioBtn) activeAudioBtn.classList.remove("playing");
+      activeAudioBtn = button;
+      button.classList.add("playing");
+      audioPlayer.src = audioFile;
+
+      try {
+        await audioPlayer.play();
+      } catch (error) {
+        stopAudio();
+        alert("No se pudo reproducir el audio relacionado con este libro.");
+      }
+    }
+
+    audioPlayer.addEventListener("ended", stopAudio);
+
+    carouselPrev.addEventListener("click", () => {
+      showCarouselSlide(carouselIndex - 1);
+      startCarouselAutoplay();
+    });
+
+    carouselNext.addEventListener("click", () => {
+      showCarouselSlide(carouselIndex + 1);
+      startCarouselAutoplay();
+    });
+
+    carouselDots.addEventListener("click", (event) => {
+      const dot = event.target.closest(".carousel-dot");
+      if (!dot) return;
+      showCarouselSlide(Number(dot.dataset.index));
+      startCarouselAutoplay();
+    });
+
+    carousel.addEventListener("mouseenter", stopCarouselAutoplay);
+    carousel.addEventListener("mouseleave", startCarouselAutoplay);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopCarouselAutoplay();
+      } else {
+        startCarouselAutoplay();
+      }
+    });
+
+    function renderBooks(query = "") {
+      stopAudio();
+      const q = query.trim().toLowerCase();
+      const filtered = books.filter((book) => {
+        const pool = `${book.title} ${book.author}`.toLowerCase();
+        return pool.includes(q);
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty">${tr("noResults")}</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((book) => {
+        const hasCover = typeof book.cover === "string" && book.cover.trim() !== "";
+        const coverStyle = hasCover ? ` style="--cover-image: url('${book.cover.replace(/'/g, "\\'")}');"` : "";
+        const coverClass = hasCover ? " has-cover" : "";
+        const audioFile = typeof book.audio === "string" ? book.audio : "";
+        return `
+        <article class="book${coverClass}"${coverStyle}>
+          <h2>${book.title}</h2>
+          <p>${book.description}</p>
+          <div class="meta">${book.author} · ${book.topic}</div>
+          <div class="actions">
+            <button class="read-btn" type="button" data-file="${book.file}" data-title="${book.title}">${tr("readNow")}</button>
+            <button class="audio-btn" type="button" data-audio="${audioFile}" aria-label="Escuchar audio de ${book.title}">
+              <span class="material-symbols-rounded">headphones</span>
+            </button>
+            <a class="link download-link" href="${book.file}" target="_blank" rel="noopener">${tr("download")}</a>
+          </div>
+        </article>
+      `;
+      }).join("");
+    }
+
+    function getSearchMatches(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) return [];
+      return books.filter((book) => {
+        const pool = `${book.title} ${book.author}`.toLowerCase();
+        return pool.includes(q);
+      });
+    }
+
+    function hideSearchResults() {
+      searchResults.classList.remove("active");
+      searchResults.innerHTML = "";
+    }
+
+    function renderSearchResults(query) {
+      const matches = getSearchMatches(query).slice(0, 8);
+      if (!query.trim()) {
+        hideSearchResults();
+        return;
+      }
+
+      if (!matches.length) {
+        searchResults.innerHTML = `<div class="search-result-empty">${tr("noSearchResults")}</div>`;
+        searchResults.classList.add("active");
+        return;
+      }
+
+      searchResults.innerHTML = matches.map((book) => `
+        <button class="search-result-btn" type="button" data-file="${book.file}" data-title="${book.title}">
+          <span class="search-result-title">${book.title}</span>
+          <span class="search-result-author">${book.author}</span>
+        </button>
+      `).join("");
+      searchResults.classList.add("active");
+    }
+
+    function openReader(file, title) {
+      modal.classList.add("active");
+      modalTitle.textContent = title;
+      pdfFrame.src = file;
+      openNewTabLink.href = file;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeReader() {
+      modal.classList.remove("active");
+      pdfFrame.src = "";
+      openNewTabLink.href = "#";
+      document.body.style.overflow = "";
+    }
+
+    grid.addEventListener("click", (event) => {
+      const audioBtn = event.target.closest(".audio-btn");
+      if (audioBtn) {
+        toggleAudio(audioBtn);
+        return;
+      }
+
+      const readBtn = event.target.closest(".read-btn");
+      if (!readBtn) return;
+      openReader(readBtn.dataset.file, readBtn.dataset.title);
+    });
+
+    closeModalBtn.addEventListener("click", closeReader);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeReader();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("active")) {
+        closeReader();
+      }
+    });
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value;
+      renderBooks(query);
+      renderSearchResults(query);
+    });
+
+    searchInput.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter") return;
+      const firstResult = searchResults.querySelector(".search-result-btn");
+      if (!firstResult) return;
+      event.preventDefault();
+      openReader(firstResult.dataset.file, firstResult.dataset.title);
+      hideSearchResults();
+    });
+
+    searchResults.addEventListener("click", (event) => {
+      const resultBtn = event.target.closest(".search-result-btn");
+      if (!resultBtn) return;
+      openReader(resultBtn.dataset.file, resultBtn.dataset.title);
+      hideSearchResults();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (event.target.closest(".search")) return;
+      hideSearchResults();
+    });
+
+    langToggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      const nextLang = currentLang === "es" ? "en" : "es";
+      applyLanguage(nextLang);
+    });
+
+    buildCarousel();
+    applyLanguage("es");
+  </script>
+</body>
+</html>
